@@ -8,6 +8,13 @@ export default new Vuex.Store({
   state: {
     discussions: [],
   },
+  getters: {
+    getDiscussion(state) {
+      return (id) => {
+        return state.discussions.find(el => el.id === id)
+      }
+    }
+  },
   plugins: [
     storage(['discussions'])
   ],
@@ -39,6 +46,9 @@ export default new Vuex.Store({
     },
     addNewComment({ commit }, params) {
       commit('addNewComment', params)
+    },
+    getDiscussion({ getters, state }, discussionId) {
+      return Promise.resolve(getters.getDiscussion(Number(discussionId)))
     }
   }
 })

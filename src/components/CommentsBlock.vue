@@ -1,5 +1,5 @@
 <template>
-  <div class="comments-block">
+  <div class="comments-block" v-if="discussion">
     <div>
       <h2>Comments to: {{ discussion.title }}</h2>
       <Comment :comment="comment" v-for="comment in discussion.comments" />
@@ -15,13 +15,21 @@ import Comment from './Comment'
 
   export default {
     name: 'CommentsBlock',
-    props: ['discussion'],
     components: {
       Comment
     },
     data: () => ({
+      discussion: null,
       newComment: ''
     }),
+    watch: {
+      $route: {
+        immediate: true,
+        handler(route) {
+          this.fetchDiscussion(route.params.id)
+        }
+      }
+    },
     methods: {
       addNewComment() {
         if (this.newComment.length === 0) {
@@ -34,6 +42,10 @@ import Comment from './Comment'
         })
 
         this.newComment = ''
+      },
+      fetchDiscussion(id) {
+        this.$store.dispatch('getDiscussion', id)
+          .then(discussion => this.discussion = discussion)
       }
     }
   }
