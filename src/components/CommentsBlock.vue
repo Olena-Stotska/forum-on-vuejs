@@ -1,8 +1,12 @@
 <template>
-  <div>
-    <h2>Comments to: {{ discussion.title }}</h2>
-    <Comment :comment="comment" v-for="comment in discussion.comments" />
-    <textarea @keyup.ctrl.enter="addNewComment" v-model.trim="newComment" placeholder="Enter your comment..."></textarea>
+  <div class="comments-block">
+    <div>
+      <h2>Comments to: {{ discussion.title }}</h2>
+      <Comment :comment="comment" v-for="comment in discussion.comments" />
+    </div>
+    <div>
+      <textarea @keyup.ctrl.enter="addNewComment" v-model.trim="newComment" rows="5" placeholder="Enter your comment..."></textarea>
+    </div>
   </div>
 </template>
 
@@ -22,7 +26,7 @@ import Comment from './Comment'
       addNewComment() {
         this.discussion.comments.unshift({
           message: this.newComment,
-          color: this.getRandomColor()
+          photo: this.getRandomColor()
         })
 
         this.newComment = ''
@@ -39,5 +43,21 @@ import Comment from './Comment'
 </script>
 
 <style scoped lang="scss">
+.comments-block {
+  flex: 1;
+  margin-left: 5px;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
 
+textarea {
+  width: 70%;
+  max-width: 70%;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 1.2rem;
+  outline: none;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="addDiscussion">
+  <form @submit.prevent="addDiscussion" class="form">
     <input v-model.trim="newDiscussion" placeholder="Add new discussion...">
   </form>
 </template>
@@ -20,5 +20,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.form {
+  margin-bottom: 40px;
 
+  input {
+    font-size: 2rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #141442;
+    outline: none;
+    color: #62626b;
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.8);
+  }
+}
 </style>
