@@ -12,7 +12,11 @@ export default {
   }),
   methods: {
     addDiscussion() {
-      this.$emit('newDiscussion', { title: this.newDiscussion, id: Math.random(), comments: [] })
+      if (this.newDiscussion.length === 0) {
+        return
+      }
+
+      this.$emit('newDiscussion', { title: this.newDiscussion })
       this.newDiscussion = ''
     }
   }

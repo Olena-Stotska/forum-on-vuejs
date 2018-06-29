@@ -24,6 +24,7 @@
   margin: 0 auto 20px auto;
   border-radius: 4px;
   color: #fff;
+  cursor: pointer;
   background-color: #10107a;
   box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.8);
   text-shadow: 1px 3px 3px rgba(255, 255, 255, 0.9);

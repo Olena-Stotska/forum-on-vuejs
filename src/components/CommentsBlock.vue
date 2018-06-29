@@ -24,19 +24,16 @@ import Comment from './Comment'
     }),
     methods: {
       addNewComment() {
-        this.discussion.comments.unshift({
-          message: this.newComment,
-          photo: this.getRandomColor()
+        if (this.newComment.length === 0) {
+          return
+        }
+
+        this.$store.dispatch('addNewComment', {
+          discussion: this.discussion,
+          newComment: this.newComment
         })
 
         this.newComment = ''
-      },
-      getRandomColor() {
-        return `rgb(${[
-          Math.floor(Math.random() * 255),
-          Math.floor(Math.random() * 255),
-          Math.floor(Math.random() * 255)
-        ].join(',')})`
       }
     }
   }
@@ -53,8 +50,8 @@ import Comment from './Comment'
 }
 
 textarea {
-  width: 70%;
   max-width: 70%;
+  width: 70%;
   border-radius: 4px;
   padding: 5px 10px;
   font-size: 1.2rem;

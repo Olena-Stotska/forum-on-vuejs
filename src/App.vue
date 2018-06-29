@@ -4,7 +4,7 @@
       <h2 class="title">All Discussins</h2>
       <DiscussionForm @newDiscussion="addDiscussion" />
       <ListDiscussions
-        @deleteDiscussion="deleteDiscussion"
+        @deleteDiscussion="destroyDiscussion"
         @showComments="showComments"
         :discussion="item"
         :key="item.id"
@@ -12,7 +12,7 @@
       />
     </div>
 
-    <CommentsBlock :discussion="selectedDiscussion" v-if="visibleCommentsBlock" />
+    <CommentsBlock :discussion="selectedDiscussion" v-if="selectedDiscussion" />
   </div>
 </template>
 
@@ -20,6 +20,8 @@
 import DiscussionForm from './components/DiscussionForm'
 import ListDiscussions from './components/ListDiscussions'
 import CommentsBlock from './components/CommentsBlock'
+
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'app',
@@ -29,22 +31,20 @@ export default {
     CommentsBlock
   },
   data: () => ({
-    discussions: [],
-    visibleCommentsBlock: false,
     selectedDiscussion: null
   }),
+  computed: {
+    ...mapState(['discussions'])
+  },
   methods: {
-    addDiscussion(discussion) {
-      console.log(discussion)
-      this.discussions.unshift(discussion)
-    },
-    deleteDiscussion(discussion) {
-      const indexDiscussion = this.discussions.indexOf(discussion)
-      this.discussions.splice(indexDiscussion, 1)
-    },
+    ...mapActions(['addDiscussion', 'deleteDiscussion']),
+
     showComments(discussion) {
-      this.visibleCommentsBlock = true
       this.selectedDiscussion = discussion
+    },
+    destroyDiscussion(discussion) {
+      this.deleteDiscussion(discussion)
+      this.selectedDiscussion = null
     }
   }
 }
