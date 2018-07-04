@@ -1,6 +1,27 @@
 # Forum on Vue.js
 
-Simple application which similar to a forum. Based on Vue.js
+## This branch have API on Node.js & Express.js
 
-* Enter new discussion, for adding comments (enter comments and press ctrl+enter)
-* A counter on the discussion it's all comments in this discussion.
+## Installation
+
+```sh
+git clone git@github.com:Olena-Stotska/forum-on-vuejs.git
+
+g co with-api
+
+npm install
+
+cd api
+```
+
+## Run Dev server
+
+```sh
+npm start
+```
+
+## Automatic re-running
+
+```sh
+npm run dev
+```
