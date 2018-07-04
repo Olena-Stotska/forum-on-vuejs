@@ -30,14 +30,22 @@ export default {
     ListDiscussions,
   },
   computed: {
-    ...mapState(['discussions'])
+    ...mapState(['discussions', 'apiError'])
   },
   methods: {
-    ...mapActions(['addDiscussion', 'deleteDiscussion']),
+    ...mapActions(['addDiscussion', 'deleteDiscussion', 'getDiscussions']),
 
     showComments(discussion) {
       this.$router.push({ path: `/discussions/${discussion.id}` })
     }
+  },
+  watch: {
+    apiError(value) {
+      console.log(value)
+    }
+  },
+  created() {
+    this.getDiscussions()
   }
 }
 </script>
