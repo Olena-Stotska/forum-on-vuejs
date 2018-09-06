@@ -33,7 +33,8 @@ export default new Vuex.Store({
     addNewComment(state, { discussion, newComment }) {
       discussion.comments.unshift({
         message: newComment,
-        photo: getRandomColor()
+        photo: getRandomColor(),
+        id: Date.now()
       })
     }
   },

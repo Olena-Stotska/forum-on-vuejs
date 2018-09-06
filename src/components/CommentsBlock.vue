@@ -2,10 +2,15 @@
   <div class="comments-block" v-if="discussion">
     <div>
       <h2>Comments to: {{ discussion.title }}</h2>
-      <Comment :comment="comment" v-for="comment in discussion.comments" />
+      <Comment :comment="comment" v-for="comment in discussion.comments" :key="comment.id" />
     </div>
     <div>
-      <textarea @keyup.ctrl.enter="addNewComment" v-model.trim="newComment" rows="5" placeholder="Enter your comment..."></textarea>
+      <textarea
+        @keyup.ctrl.enter="addNewComment"
+        v-model.trim="newComment"
+        rows="5"
+        placeholder="Enter your comment...">
+      </textarea>
     </div>
   </div>
 </template>
